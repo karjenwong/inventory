@@ -22,12 +22,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/addinventory", {
-        name: "Mario Party",
-        category: "Video Games",
-        qty: 10000,
-        owner: "BestBuy"
-      })
+      .get("http://localhost:8080/allinventory")
       .then(x => setData(x.data.response))
       .then(console.log("fetched data"));
   }, []);
@@ -38,10 +33,9 @@ function App() {
   };
 
   let add =()=> {
-    console.log(form)
     axios
       .post("http://localhost:8080/addinventory", form)
-      .then(x => setData(x.data.response))
+      .then(x => setData(x.data.response)) //assume it's valid
   }
   return (
     <div className="App">

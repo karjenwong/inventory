@@ -45,6 +45,9 @@ const data = [
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get("/allinventory", (req, res) => {
+  res.json({ "response": data })
+})
 app.post("/addinventory",(req,res)=> {
   let newItem = req.body
   newItem.uid = data.length+1

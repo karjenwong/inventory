@@ -1,16 +1,17 @@
 import React from 'react';
 
 function Items(test)  {
- return test.map(item=> (
-  <div>
-  <h2>{item.name}</h2>
-    <p>{item.id}</p>
-    <p>{item.category}</p>
-    <p>{item.qty}</p>
-    <p>{item.owner}</p>
-</div>
- ))
-  
+  return test.map(item=> {
+    item.name = item.name.toUpperCase()
+    return (
+    <div>
+      <h2>({item.uid}) {item.name}</h2>
+        <p>Category: {item.category}</p>
+        <p>Qty: {item.qty}</p>
+        <p>Owner: {item.owner}</p>
+    </div>
+    )
+  })  
 }
 
 export default Items;

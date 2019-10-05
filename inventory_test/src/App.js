@@ -14,10 +14,10 @@ function App() {
   ]);
 
   const [form, setForm] = useState({
-    name: "rare",
-    category: "secret",
-    qty: 1,
-    owner: "kyle"
+    name: "",
+    category: "",
+    qty: 0,
+    owner: ""
   });
 
   useEffect(() => {
@@ -29,14 +29,22 @@ function App() {
 
   const fill = v => {
     form[v.target.name] = v.target.value;
+    if (v.target.name === "qty") form["qty"] = Number(form["qty"]);
     setForm({ ...form });
   };
 
-  let add =()=> {
-    axios
-      .post("http://localhost:8080/addinventory", form)
-      .then(x => setData(x.data.response)) //assume it's valid
-  }
+  const add = () => {
+    let valid = Object.keys(form).every(x => form[x]);
+
+    if (valid) {
+      axios
+        .post("http://localhost:8080/addinventory", form)
+        .then(x => setData(x.data.response));
+      console.log("pass");
+    } else {
+      console.log("sth is wrong", form);
+    }
+  };
   return (
     <div className="App">
       <div>
@@ -59,7 +67,9 @@ function App() {
             <label>Owner </label>
             <input type="text" name="owner" onChange={fill} />
           </div>
-          <button type="button" onClick={add}>Submit</button>
+          <button type="button" onClick={add}>
+            Submit
+          </button>
         </form>
         <h2>Default Inventory stuff</h2>
         <div>

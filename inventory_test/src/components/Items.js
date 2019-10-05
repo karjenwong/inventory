@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Items(test)  {
-  return test.map(item=> {
+function Items({data})  {
+  return data.map(item=> {
     item.name = item.name.toUpperCase()
     return (
     <div>

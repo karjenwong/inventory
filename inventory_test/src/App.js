@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import Items from "./components/Items";
-import Form from "./components/Form";
+import AddInventory from "./components/AddInventory";
 function App() {
   const [data, setData] = useState([]);
 
@@ -15,9 +15,9 @@ function App() {
 
   return (
     <div className="App">
-      <Form data ={data} setData={setData}/>
+      <AddInventory setData={setData} />
       <div>
-        <h1>Display Inventory</h1>
+        
         <Items data={data} />
       </div>
     </div>

@@ -16,16 +16,12 @@ function Form({setData}) {
 
   const add = () => {
     let valid = Object.keys(form).every(x => form[x]);
-
     if (valid) {
       axios
         .post("http://localhost:8080/addinventory", form)
         .then(x=> setData(x.data.response))
-      console.log("pass");
-    } else {
-      console.log("sth is wrong", form);
-    }
-  };
+    } else console.log("sth is wrong") 
+  };  
 
   return (
     <div>

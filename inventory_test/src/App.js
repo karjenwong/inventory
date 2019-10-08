@@ -16,10 +16,7 @@ function App() {
   return (
     <div className="App">
       <AddInventory setData={setData} />
-      <div>
-        
-        <Items data={data} />
-      </div>
+      <Items data={data} />
     </div>
   );
 }

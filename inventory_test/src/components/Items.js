@@ -1,16 +1,21 @@
 import React from "react";
 
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 function Items({ data }) {
   let list = data.map(item => {
     return (
-      <div key={item.uid}>
-        <h2>
-          ({item.uid}) {item.name.toUpperCase()}
-        </h2>
-        <p>Category: {item.category}</p>
-        <p>Qty: {item.qty}</p>
-        <p>Owner: {item.owner}</p>
-      </div>
+      <Card style={{ width: "18rem" }} key={item.uid}>
+        <Card.Body>
+          <Card.Title>
+            {item.uid} {item.name.toUpperCase()}
+          </Card.Title>
+          <Card.Text>Category: {item.category}</Card.Text>
+          <Card.Text>Qty: {item.qty}</Card.Text>
+          <Card.Text>Owner: {item.owner}</Card.Text>
+          <Button variant="primary">Edit</Button>
+        </Card.Body>
+      </Card>
     );
   });
 

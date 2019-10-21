@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <AddInventory setData={setData} />
-      <Items data={data} />
+      <Items data={data} setData={setData}/>
     </div>
   );
 }

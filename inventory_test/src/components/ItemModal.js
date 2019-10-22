@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-function ItemModal({item,setData}) {
+import axios from "axios"
+
+function ItemModal({ item, setData }) {
   const [form, setForm] = useState({
+    uid: item.uid,
     name: item.name,
     category: item.category,
     qty: item.qty,
@@ -14,19 +17,19 @@ function ItemModal({item,setData}) {
     if (v.target.name === "qty") form["qty"] = Number(form["qty"]);
     setForm({ ...form });
   };
-  
-  
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const submit =(x) => {
-    console.log(form)
-    console.log(x)
-
-  }
- 
-
+  const submit = () => {
+    let valid = Object.keys(form).every(x => form[x]);
+    if (valid) {
+      axios
+        .post("http://localhost:8080/editinventory", form)
+        .then(x => setData(x.data.response));
+    } else console.log("sth is wrong");
+  };
 
   return (
     <div className="modalContainer">
@@ -39,22 +42,41 @@ function ItemModal({item,setData}) {
         </Modal.Header>
         <Modal.Body>
           <div>
-            <h4>Name: {item.name}</h4>  
-            <input type="text" name="name" placeholder={item.name} onChange={fill}/>
+            <h4>Name: {item.name}</h4>
+            <input
+              type="text"
+              name="name"
+              placeholder={item.name}
+              onChange={fill}
+            />
           </div>
           <div>
-            <h4>Category: {item.category}</h4>  
-            <input type="text" name="category"placeholder={item.category} onChange={fill}/>
+            <h4>Category: {item.category}</h4>
+            <input
+              type="text"
+              name="category"
+              placeholder={item.category}
+              onChange={fill}
+            />
           </div>
           <div>
-            <h4>Quantity: {item.qty}</h4>  
-            <input type="number" name="qty"placeholder={item.qty} onChange={fill}/>
+            <h4>Quantity: {item.qty}</h4>
+            <input
+              type="number"
+              name="qty"
+              placeholder={item.qty}
+              onChange={fill}
+            />
           </div>
           <div>
-            <h4>Owner: {item.owner}</h4>  
-            <input type="text" name="owner"placeholder={item.owner} onChange={fill}/>
+            <h4>Owner: {item.owner}</h4>
+            <input
+              type="text"
+              name="owner"
+              placeholder={item.owner}
+              onChange={fill}
+            />
           </div>
-     
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

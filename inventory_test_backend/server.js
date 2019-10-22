@@ -55,6 +55,14 @@ app.post("/addinventory",(req,res)=> {
   res.json({ "response": data })
 })
 
+app.post("/editinventory",(req,res)=> {
+  let newEdit = req.body
+  let index = data.findIndex(x=> x.uid === newEdit.uid)
+  data[index] = newEdit
+
+  res.json({ "response": data })
+})
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
